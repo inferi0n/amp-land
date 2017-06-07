@@ -90,10 +90,12 @@ app.post('/subscribe', (req, res) => {
             "subscriber": true
         };
         res.cookie('amp-subscribe', access);
-        res.redirect(body.returnurl + '#success=true');
+        // res.redirect(body.returnurl + '#success=true');
+        res.send();
     }, () => {
         res.clearCookie('amp-subscribe');
-        res.redirect(body.returnurl + '#success=false');
+        // res.redirect(body.returnurl + '#success=false');
+        res.send(400);
     });
 });
 
