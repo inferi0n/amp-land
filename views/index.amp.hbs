@@ -8,10 +8,10 @@
     <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
     <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
     <script async custom-element="amp-lightbox" src="https://cdn.ampproject.org/v0/amp-lightbox-0.1.js"></script>
-    <script async custom-element="amp-access" src="https://cdn.ampproject.org/v0/amp-access-0.1.js"></script>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
     <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"></script>
     <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+    <script async custom-element="amp-access" src="https://cdn.ampproject.org/v0/amp-access-0.1.js"></script>
     <title>Hot Shapers / Одежда для похудения</title>
     <meta name="description" content="">
     <meta name="keywords" content="спортивная одежда для похудения hot shapers hotshapers избавиться от лишнего веса для фитнеса пояс бриджи леггинсы майка футболка утягивающее боди утягивающие шорты спорт для занятий спортом">
@@ -21,9 +21,9 @@
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <script id="amp-access" type="application/json">
         {
-            "authorization": "http://hot-shapers.on-that.website/auth?rid=READER_ID&url=CANONICAL_URL",
+            "authorization": "/auth?rid=READER_ID&url=CANONICAL_URL",
             "noPingback": true,
-            "login": "http://hot-shapers.on-that.website/login?rid=READER_ID&url=CANONICAL_URL",
+            "login": "/login?rid=READER_ID&url=CANONICAL_URL",
             "authorizationFallbackResponse": {
                 "error": true,
                 "access": false
@@ -858,6 +858,14 @@
             }
         </script>
     </amp-state>
+    <amp-state id="accessState">
+        <script type="application/json">
+            {
+                "allow": "access",
+                "deny": "NOT access"
+            }
+        </script>
+    </amp-state>
 
     <amp-lightbox id="order" layout="nodisplay" scrollable>
         <section class="order-wrapper">
@@ -865,8 +873,8 @@
                 <a class="order-phone" href="tel:+74951202762">+7 (495) 120-27-62</a>
                 <p>или</p>
                 <p>Оставьте заявку и наш менеджер перезвонит вам в течение 15 минут</p>
-                <form method="POST" action-xhr="/order" on="submit:success-lightbox" target="_top">
-                    <input class="btn yellow-border" type="tel" placeholder="Ваш номер телефона" pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" title="Введите ваш номер телефона, например, 89991234567" required>
+                <form method="POST" action-xhr="/order" on="submit:order.close,success-lightbox" target="_top">
+                    <input class="btn yellow-border" name="phone" type="tel" placeholder="Ваш номер телефона" pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" title="Введите ваш номер телефона, например, 89991234567" required>
                     <input class="btn default yellow-border" type="submit" value="Отправить">
                 </form>
             </div>
@@ -898,7 +906,7 @@
         </section>
     </amp-lightbox>
 
-    <amp-lightbox id="success-modal" layout="nodisplay" scrollable>
+    <amp-lightbox id="success-lightbox" layout="nodisplay" scrollable>
         <section class="success-wrapper">
             <h3>Спасибо за заказ!</h3>
             <p>Менеджер свяжется с вами в течение 15 минут.</p>
@@ -911,7 +919,7 @@
                 <li><a href="http://moda24.online">Интернет-магазин модных аксессуаров</a></li>
                 <li><a href="http://vsekonstruktory.ru">Интернет-магазин конструкторов для детей и взрослых</a></li>
             </ul>
-            <button class="btn close" on="tap:success-modal.close">Закрыть</button>
+            <button class="btn close" on="tap:success-lightbox.close">Закрыть</button>
         </section>
     </amp-lightbox>
 

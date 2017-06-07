@@ -7,6 +7,7 @@ const _            = require('lodash');
 const { readAdds }     = require('./server/middleware/readAdds');
 const { readProducts } = require('./server/middleware/readProducts');
 const { User }         = require('./server/models/user');
+const { mailOpts, sendMail } = require('./server/config/mail');
 
 const app = express();
 const port = process.env.PORT;
@@ -27,7 +28,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/auth', (req, res) => {
-    console.log(req.body);
+    res.set('Content-type', 'application/json');
+    res.set('Access-Control-Allow-Credentials', true);
+    res.set('Access-Control-Allow-Origin', '*.ampproject.org');
+    res.set('AMP-Access-Control-Allow-Source-Origin', 'http://localhost:3000');
+    res.set('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
+    res.send({"success": "false"});
 });
 
 app.get('/login', (req, res) => {
@@ -35,7 +41,18 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/order', (req, res) => {
-    console.log(res);
+    let body = _.pick(req.body, ['phone']);
+
+    let options = mailOpts;
+    options.html = `Номер телефона покупателя: ${body.phone}`;
+
+    sendMail(options, (err, res) => {
+        if (err) {
+            return res.status(400).send({"success": false});
+        }
+
+        res.send({"success": true});
+    });
 });
 
 app.post('/subscribe', (req, res) => {
@@ -43,6 +60,11 @@ app.post('/subscribe', (req, res) => {
     let user = new User(body);
 
     user.save().then(() => {
+        res.set('Content-type', 'application/json');
+        res.set('Access-Control-Allow-Credentials', true);
+        res.set('Access-Control-Allow-Origin', '*.ampproject.org');
+        res.set('AMP-Access-Control-Allow-Source-Origin', 'https://hot-shapers.on-that.website');
+        res.set('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
         res.redirect(body.returnurl);
     }, () => {
         res.status(400).redirect(body.returnurl);
