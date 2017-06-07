@@ -2,7 +2,7 @@ require('./server/config/config');
 
 const express      = require('express');
 const bodyParser   = require('body-parser');
-const fs           = require('')
+const fs           = require('fs');
 
 const { mongoose } = require('./server/db/mongoose');
 const { readAdds } = require('./server/middleware/readAdds');
@@ -20,6 +20,10 @@ app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
    res.render('index.amp.hbs');
+});
+
+app.get('/login', (req, res) => {
+   res.render('login.hbs');
 });
 
 app.get('/data/products', readProducts, (req, res) => {
