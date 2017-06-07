@@ -25,8 +25,10 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.get('/', (req, res) => {
-   res.render('index.amp.hbs');
+app.get('/', readProducts, (req, res) => {
+   res.render('index.amp.hbs', {
+       items: req.products.items
+   });
 });
 
 app.get('/auth', (req, res) => {

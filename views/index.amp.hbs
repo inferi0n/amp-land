@@ -419,6 +419,7 @@
         .catalog-content .sizes {
             font-weight: normal;
             display: block;
+            margin-bottom: 10px;
         }
 
         .catalog-content .likes {
@@ -443,12 +444,8 @@
         }
 
         .catalog-content .price {
-            display: inline-block;
             font-size: 2em;
             font-weight: bold;
-            margin-top: 10px;
-            padding-top: 10px;
-            padding-bottom: 10px;
             margin-right: 90px;
         }
 
@@ -923,28 +920,32 @@
         </section>
     </amp-lightbox>
 
-    <amp-list class="catalog" height="2623" src="data/products">
-        <template type="amp-mustache">
-            <section id="\{{id}}" class="catalog \{{name}}">
+    <!--<amp-list height="2623" src="data/products">-->
+        <!--<template type="amp-mustache">-->
+    <section class="catalog-wrapper">
+        {{#each items}}
+            <section id="{{id}}" class="catalog {{name}}">
                 <div class="catalog-image">
-                    <amp-img src="\{{img}}" alt="\{{name}}" width="500" height="500"></amp-img>
+                    <amp-img src="{{img}}" alt="{{name}}" width="500" height="500"></amp-img>
                 </div>
                 <div class="catalog-content">
-                    <h3 class="name">\{{name}}</h3>
-                    <p class="description">\{{description}}</p>
+                    <h3 class="name">{{name}}</h3>
+                    <p class="description">{{description}}</p>
                     <div class="sizes-caption">
                         Доступные размеры:
-                        <div class="sizes">\{{sizes}}</div>
+                        <div class="sizes">{{sizes}}</div>
                     </div>
-                    <div class="likes" tabindex="1" role="checkbox" on="tap:AMP.setState({liked: ((liked - 1) * (-1) + '')})"><i class="icon_like" [class]="'icon_like ' + likeState[liked]">♡</i><span class="like_count">\{{likes}}</span></div>
+                    <div class="likes" tabindex="1" role="checkbox" on="tap:AMP.setState({liked: ((liked - 1) * (-1) + '')})"><i class="icon_like" [class]="'icon_like ' + likeState[liked]">♡</i><span class="like_count">{{likes}}</span></div>
                     <br>
-                    <p class="price" amp-access="\{{deny}}">\{{oldPrice}} ₽</p>
-                    <p class="price" amp-access="\{{allow}}">\{{newPrice}} ₽</p>
-                    <button class="btn default" on="tap:order,AMP.setState({currentAdd1: '\{{add1}}', currentAdd2: '\{{add2}}'})">Заказать сейчас</button>
+                    <span class="price" amp-access="NOT access">{{oldPrice}} ₽</span>
+                    <span class="price" amp-access="access">{{newPrice}} ₽</span>
+                    <button class="btn default" on="tap:order,AMP.setState({currentAdd1: '{{add1}}', currentAdd2: '{{add2}}'})">Заказать сейчас</button>
                 </div>
             </section>
-        </template>
-    </amp-list>
+        {{/each}}
+    </section>
+        <!--</template>-->
+    <!--</amp-list>-->
 
     <section id="promo" class="promo">
         <div class="promo-container">
