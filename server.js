@@ -5,6 +5,7 @@ const bodyParser   = require('body-parser');
 const _            = require('lodash');
 const cookieParser = require('cookie-parser');
 
+const { mongoose }     = require('./server/db/mongoose');
 const { readAdds }     = require('./server/middleware/readAdds');
 const { readProducts } = require('./server/middleware/readProducts');
 const { User }         = require('./server/models/user');
@@ -79,13 +80,11 @@ app.post('/order', (req, res) => {
             return res.status(400).send(info.response);
         }
 
-        console.log('2');
-
-        res.send(info.response);
+        return res.send(info.response);
     });
 });
 
-app.post('/subscribe', (req, res) => {
+app.post('/login', (req, res) => {
     let body = _.pick(req.body, ['email', 'returnurl']);
     let user = new User(body);
 
@@ -101,12 +100,13 @@ app.post('/subscribe', (req, res) => {
             "subscriber": true
         };
         res.cookie('amp-subscribe', access);
-        // res.redirect(body.returnurl + '#success=true');
-        res.send();
-    }, () => {
+        res.redirect(body.returnurl + '#success=true');
+    }, (err) => {
         res.clearCookie('amp-subscribe');
-        // res.redirect(body.returnurl + '#success=false');
-        res.send(400);
+        console.log(err);
+        res.send({
+            error: "Адрес электронной почты уже занят. Попробуйте снова"
+        })
     });
 });
 
@@ -118,6 +118,11 @@ app.get('/data/adds', readAdds, (req, res) => {
     res.send(req.adds);
 });
 
-app.listen(port, () => {
-    console.log(`Server is up on port ${port}`);
+mongoose.connect(process.env.MONGO_URL).then(() => {
+    app.listen(port, () => {
+        console.log(`Server is up on port ${port}`);
+    });
+}).catch((err) => {
+    console.log(err);
 });
+

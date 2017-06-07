@@ -83,7 +83,10 @@
 	</header>
 
  	<section>
- 		<form method="POST" action-xhr="/subscribe">
+ 		<form method="POST" action-xhr="/login">
+            {{#if error}}
+                <p>{{error}}</p>
+            {{/if}}
  			<input class="btn" type="email" name="email" placeholder="Укажите ваш e-mail" required>
  			<input class="btn default" type="submit" value="Отправить">
             <input name="returnurl" type="hidden" value="https://cdn.ampproject.org/v0/amp-login-done-0.1.html?url=https://hot-shapers.on-that.website#subscription">
