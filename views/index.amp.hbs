@@ -10,6 +10,8 @@
     <script async custom-element="amp-lightbox" src="https://cdn.ampproject.org/v0/amp-lightbox-0.1.js"></script>
     <script async custom-element="amp-access" src="https://cdn.ampproject.org/v0/amp-access-0.1.js"></script>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"></script>
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
     <title>Hot Shapers / Одежда для похудения</title>
     <meta name="description" content="">
     <meta name="keywords" content="спортивная одежда для похудения hot shapers hotshapers избавиться от лишнего веса для фитнеса пояс бриджи леггинсы майка футболка утягивающее боди утягивающие шорты спорт для занятий спортом">
@@ -835,7 +837,7 @@
             </p>
         </div>
 
-        <div class="neotex-subscription" amp-access="NOT access" amp-access-hide>
+        <div id="subscription" class="neotex-subscription" amp-access="NOT access" amp-access-hide>
             <h3>Хотите скидку?</h3>
             <p>Подпишитесь и получите <b>скидку 15%</b> на весь товар! <br> Также вы сможете первыми узнавать о новых акциях и товарах.</p>
             <button class="btn default block" on="tap:amp-access.login">Подписаться на акции</button>
@@ -863,7 +865,7 @@
                 <a class="order-phone" href="tel:+74951202762">+7 (495) 120-27-62</a>
                 <p>или</p>
                 <p>Оставьте заявку и наш менеджер перезвонит вам в течение 15 минут</p>
-                <form action-xhr="/" on="submit:success-lightbox">
+                <form method="POST" action-xhr="/order" on="submit:success-lightbox" target="_top">
                     <input class="btn yellow-border" type="tel" placeholder="Ваш номер телефона" pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" title="Введите ваш номер телефона, например, 89991234567" required>
                     <input class="btn default yellow-border" type="submit" value="Отправить">
                 </form>
@@ -913,7 +915,7 @@
         </section>
     </amp-lightbox>
 
-    <amp-list class="catalog" src="data/products" layout="responsive" height="520" width="1000">
+    <amp-list class="catalog" height="2623" src="data/products">
         <template type="amp-mustache">
             <section id="\{{id}}" class="catalog \{{name}}">
                 <div class="catalog-image">
@@ -922,13 +924,15 @@
                 <div class="catalog-content">
                     <h3 class="name">\{{name}}</h3>
                     <p class="description">\{{description}}</p>
-                    <div class="sizes-caption">Доступные размеры:</div>
-                    <div class="sizes">\{{sizes}}</div>
-                    <div class="likes" on="tap:AMP.setState({liked: ((liked - 1) * (-1) + '')})"><i class="icon_like" [class]="'icon_like ' + likeState[liked]">♡</i><span class="like_count">\{{likes}}</span></div>
+                    <div class="sizes-caption">
+                        Доступные размеры:
+                        <div class="sizes">\{{sizes}}</div>
+                    </div>
+                    <div class="likes" tabindex="1" role="checkbox" on="tap:AMP.setState({liked: ((liked - 1) * (-1) + '')})"><i class="icon_like" [class]="'icon_like ' + likeState[liked]">♡</i><span class="like_count">\{{likes}}</span></div>
                     <br>
                     <p class="price" amp-access="NOT access" amp-access-hide>\{{oldPrice}} ₽</p>
                     <p class="price" amp-access="access">\{{newPrice}} ₽</p>
-                    <button class="btn default" on="tap:order,setState({currentAdd1: '\{{add1}}', currentAdd2: '\{{add2}}'})">Заказать сейчас</button>
+                    <button class="btn default" on="tap:order,AMP.setState({currentAdd1: '\{{add1}}', currentAdd2: '\{{add2}}'})">Заказать сейчас</button>
                 </div>
             </section>
         </template>

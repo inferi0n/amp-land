@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 let readProducts = (req, res, next) => {
     fs.readFile('./data/products.json', (err, data) => {
         if (err) {

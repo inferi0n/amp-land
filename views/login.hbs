@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Оформление подписки Hot Shapers</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<style>
+		html,
+		body {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+            font-family: "Open Sans", sans-serif;
+		}
+
+		* {
+			box-sizing: inherit;
+		}
+
+		section {
+			width: 300px;
+			margin: 0 auto;
+			text-align: center;
+		}
+
+		header {
+			background-color: black;
+		}
+
+		header > div {
+			width: 300px;
+			margin: 0 auto;
+			padding: 10px;
+			text-align: center;
+		}
+
+   		h1 { 
+    		font-size: 24px; 
+    		color: #ffd600; 
+   		}
+
+   		form {
+   			padding: 20px;
+   		}
+
+        .btn {
+            padding: 0.7em 2em;
+            font-size: 1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            max-width: 100%;
+            width: 100%;
+            border: 3px solid black;
+        }
+
+        .btn.default {
+            color: black;
+            background-color: #ffd600;
+        }
+
+        .btn:focus {
+            outline: #ffd600 auto 5px;
+        }
+
+        .btn + .btn {
+            margin-top: 10px;
+        }
+
+        .notice {
+            font-size: 0.8em;
+        }
+  	</style>
+</head>
+<body>
+	<header>
+		<div>
+			<img src="img/logo-min.png" alt="Hot Shapers">
+			<h1>Оформление подписки</h1>
+		</div>
+	</header>
+
+ 	<section>
+ 		<form method="POST" action="/subscribe">
+ 			<input class="btn" type="email" name="email" placeholder="Укажите ваш e-mail" required>
+ 			<input class="btn default" type="submit" value="Отправить">
+            <input name="returnurl" type="hidden" value="https://cdn.ampproject.org/v0/amp-login-done-0.1.html?url=https://hot-shapers.online#subscription">
+            <p class="notice">* Вы сможете отписаться в любое время, по телефону <a href="tel:+74951202762">+7 (495) 120-27-62</a> или по ссылке в письме</p>
+        </form>
+    </section>
+</body>
+</html>

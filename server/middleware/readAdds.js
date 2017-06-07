@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 let readAdds = (req, res, next) => {
     fs.readFile('./data/adds.json', (err, data) => {
         if (err) {
