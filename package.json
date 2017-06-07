@@ -23,6 +23,7 @@
   "homepage": "https://github.com/inferi0n/amp-land#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
     "hbs": "^4.0.1",
     "lodash": "^4.17.4",

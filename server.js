@@ -3,6 +3,7 @@ require('./server/config/config');
 const express      = require('express');
 const bodyParser   = require('body-parser');
 const _            = require('lodash');
+const cookieParser = require('cookie-parser');
 
 const { readAdds }     = require('./server/middleware/readAdds');
 const { readProducts } = require('./server/middleware/readProducts');
@@ -22,18 +23,23 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.get('/', (req, res) => {
    res.render('index.amp.hbs');
 });
 
 app.get('/auth', (req, res) => {
-    res.set('Content-type', 'application/json');
-    res.set('Access-Control-Allow-Credentials', true);
-    res.set('Access-Control-Allow-Origin', '*.ampproject.org');
-    res.set('AMP-Access-Control-Allow-Source-Origin', 'https://hot-shapers.on-that.website');
-    res.set('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
-    res.send({"success": "false"});
+    if (req.cookies['amp-subscribe'].access) {
+        res.set('Content-type', 'application/json');
+        res.set('Access-Control-Allow-Credentials', true);
+        res.set('Access-Control-Allow-Origin', '*.ampproject.org');
+        res.set('AMP-Access-Control-Allow-Source-Origin', 'https://hot-shapers.on-that.website');
+        res.set('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
+        res.send({"success": true});
+    } else {
+        res.send({"success": false});
+    }
 });
 
 app.get('/login', (req, res) => {
@@ -58,16 +64,21 @@ app.post('/order', (req, res) => {
 app.post('/subscribe', (req, res) => {
     let body = _.pick(req.body, ['email', 'returnurl']);
     let user = new User(body);
+    res.set('Content-type', 'application/json');
 
     user.save().then(() => {
-        res.set('Content-type', 'application/json');
-        res.set('Access-Control-Allow-Credentials', true);
-        res.set('Access-Control-Allow-Origin', '*.ampproject.org');
-        res.set('AMP-Access-Control-Allow-Source-Origin', 'https://hot-shapers.on-that.website');
-        res.set('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
-        res.send({"success": true})
+        let access = {
+            "access":     true,
+            "subscriber": true
+        };
+        res.cookie('amp-subscribe', access);
+        res.send(access);
     }, () => {
-        res.status(400).send({"success": false});
+        res.clearCookie('amp-subscribe');
+        res.send({
+            "access":     false,
+            "subscriber": false
+        });
     });
 });
 
