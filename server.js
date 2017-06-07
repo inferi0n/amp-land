@@ -35,7 +35,6 @@ app.get('/', readProducts, (req, res) => {
 });
 
 app.get('/auth', setHeaders, (req, res) => {
-
     if (req.cookies['amp-subscribe']) {
         if (req.cookies['amp-subscribe'].access === true) {
             res.send({
