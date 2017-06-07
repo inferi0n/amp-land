@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "id": "breeches",
+      "name": "Бриджи Hot Shapers",
+      "description": "",
+      "sizes": "S / M / L / XL / XXL / XXXL / XXXXL",
+      "img": "img/breeches-min.jpg",
+      "oldPrice": 1724,
+      "newPrice": 1477,
+      "likes": 158,
+      "add1": "Набор утягивающего белья",
+      "add2": "Шорты утягивающие"
+    },
+    {
+      "id": "leggings",
+      "name": "Леггинсы Hot Shapers",
+      "description": "",
+      "sizes": "M / L / XL",
+      "img": "img/leggings-min.jpg",
+      "oldPrice": 1609,
+      "newPrice": 1399,
+      "likes": 173,
+      "add1": "Набор утягивающего белья",
+      "add2": "Шорты утягивающие"
+    },
+    {
+      "id": "tshirt",
+      "name": "Футболка Hot Shapers",
+      "description": "",
+      "sizes": "M / L / XL / XXL",
+      "img": "img/tshirt-min.jpg",
+      "oldPrice": 1499,
+      "newPrice": 1299,
+      "likes": 165,
+      "add1": "Набор утягивающего белья",
+      "add2": "Шорты утягивающие"
+    },
+    {
+      "id": "shirt",
+      "name": "Майка Hot Shapers",
+      "description": "",
+      "sizes": "M / L / XL / XXL",
+      "img": "img/shirt-min.jpg",
+      "oldPrice": 1439,
+      "newPrice": 1249,
+      "likes": 179,
+      "add1": "Набор утягивающего белья",
+      "add2": "Шорты утягивающие"
+    },
+    {
+      "id": "belt",
+      "name": "Пояс Hot Shapers",
+      "description": "",
+      "sizes": "S / M / L / XL / XXL / XXXL / XXXXL",
+      "img": "img/belt-min.jpg",
+      "oldPrice": 919,
+      "newPrice": 799,
+      "likes": 164,
+      "add1": "Набор утягивающего белья",
+      "add2": "Шорты утягивающие"
+    }
+  ]
+}
