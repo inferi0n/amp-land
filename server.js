@@ -8,8 +8,9 @@ const cookieParser = require('cookie-parser');
 const { mongoose }     = require('./server/db/mongoose');
 const { readAdds }     = require('./server/middleware/readAdds');
 const { readProducts } = require('./server/middleware/readProducts');
+const { setHeaders } = require('./server/middleware/setHeaders');
 const { User }         = require('./server/models/user');
-const { mailOpts, sendMail } = require('./server/config/mail');
+const { mail } = require('./server/config/mail');
 
 const app = express();
 const port = process.env.PORT;
@@ -33,12 +34,7 @@ app.get('/', readProducts, (req, res) => {
    });
 });
 
-app.get('/auth', (req, res) => {
-    res.set('Content-type', 'application/json');
-    res.set('Access-Control-Allow-Credentials', true);
-    res.set('Access-Control-Allow-Origin', '*.ampproject.org');
-    res.set('AMP-Access-Control-Allow-Source-Origin', 'https://hot-shapers.on-that.website');
-    res.set('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
+app.get('/auth', setHeaders, (req, res) => {
 
     if (req.cookies['amp-subscribe']) {
         if (req.cookies['amp-subscribe'].access === true) {
@@ -61,38 +57,11 @@ app.get('/login', (req, res) => {
    res.render('login.hbs');
 });
 
-app.post('/order', (req, res) => {
-    let body = _.pick(req.body, ['phone']);
+app.post('/order', setHeaders, mail);
 
-    let options = mailOpts;
-    options.html = `Номер телефона покупателя: ${body.phone}`;
-
-    res.set('Content-type', 'application/json');
-    res.set('Access-Control-Allow-Credentials', true);
-    res.set('Access-Control-Allow-Origin', '*.ampproject.org');
-    res.set('AMP-Access-Control-Allow-Source-Origin', 'https://hot-shapers.on-that.website');
-    res.set('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
-
-    console.log('1');
-
-    sendMail(options, (err, info) => {
-        if (err) {
-            return res.status(400).send(info.response);
-        }
-
-        return res.send(info.response);
-    });
-});
-
-app.post('/login', (req, res) => {
+app.post('/login', setHeaders, (req, res) => {
     let body = _.pick(req.body, ['email', 'returnurl']);
     let user = new User(body);
-
-    res.set('Content-type', 'application/json');
-    res.set('Access-Control-Allow-Credentials', true);
-    res.set('Access-Control-Allow-Origin', '*.ampproject.org');
-    res.set('AMP-Access-Control-Allow-Source-Origin', 'https://hot-shapers.on-that.website');
-    res.set('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
 
     user.save().then(() => {
         let access = {
@@ -103,8 +72,7 @@ app.post('/login', (req, res) => {
         res.redirect(body.returnurl + '#success=true');
     }, (err) => {
         res.clearCookie('amp-subscribe');
-        console.log(err);
-        res.send({
+        res.render('login.hbs', {
             error: "Адрес электронной почты уже занят. Попробуйте снова"
         })
     });
