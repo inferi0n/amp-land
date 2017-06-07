@@ -102,11 +102,13 @@
         body {
             margin: 0;
             padding: 0;
+            -webkit-box-sizing: border-box;
             box-sizing: border-box;
             font-family: "Open Sans", sans-serif;
         }
 
         * {
+            -webkit-box-sizing: inherit;
             box-sizing: inherit;
         }
 
@@ -253,6 +255,7 @@
             font-size: 1em;
             text-transform: uppercase;
             cursor: pointer;
+            -webkit-box-shadow: none;
             box-shadow: none;
             border: none;
             max-width: 100%;
@@ -369,8 +372,14 @@
             border-top: 2px solid #ffd600;
             border-bottom: 2px solid #ffd600;
             padding: 10px 50px;
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
             justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
             align-items: center;
         }
 
@@ -519,6 +528,7 @@
             top: 50%;
             left: 50%;
             padding: 20px 30px;
+            -webkit-transform: translate(-50%,-50%);
             transform: translate(-50%,-50%);
         }
 
@@ -547,13 +557,20 @@
         }
 
         .add-container {
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
+            -ms-flex-wrap: wrap;
             flex-wrap: wrap;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
             justify-content: center;
         }
 
         .add-title {
             margin-bottom: 0;
+            -webkit-box-flex: 1;
+            -ms-flex: 1 0 100%;
             flex: 1 0 100%;
         }
 
@@ -585,6 +602,7 @@
             top: 50%;
             left: 50%;
             padding: 20px 30px;
+            -webkit-transform: translate(-50%,-50%);
             transform: translate(-50%,-50%);
         }
 
@@ -623,6 +641,7 @@
         @media (max-width: 1200px) {
             .order-wrapper {
                 position: static;
+                -webkit-transform: none;
                 transform: none;
             }
 
@@ -688,6 +707,9 @@
             }
 
             .catalog {
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: column;
                 flex-direction: column;
             }
 
@@ -740,7 +762,6 @@
                 background-size: auto 100%;
             }
         }
-
     </style>
 </head>
 <body>
@@ -826,7 +847,7 @@
         </div>
     </section>
 
-    <amp-state id="adds" src="adds.json"></amp-state>
+    <amp-state id="adds" src="data/adds"></amp-state>
     <amp-state id="likeState">
         <script type="application/json">
             {
@@ -892,7 +913,7 @@
         </section>
     </amp-lightbox>
 
-    <amp-list class="catalog" src="/products.json" layout="responsive" height="520" width="1000">
+    <amp-list class="catalog" src="data/products" layout="responsive" height="520" width="1000">
         <template type="amp-mustache">
             <section id="\{{id}}" class="catalog \{{name}}">
                 <div class="catalog-image">
