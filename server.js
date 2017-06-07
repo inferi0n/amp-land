@@ -4,6 +4,7 @@ const express      = require('express');
 const bodyParser   = require('body-parser');
 const _            = require('lodash');
 const cookieParser = require('cookie-parser');
+const minifyHTML   = require('express-minify-html');
 
 const { mongoose }     = require('./server/db/mongoose');
 const { readAdds }     = require('./server/middleware/readAdds');
@@ -21,6 +22,19 @@ app.set('views engine', 'hbs');
 app.use(express.static(__dirname + '/public', {
     etag: true,
     maxAge: '30 days'
+}));
+
+app.use(minifyHTML({
+    override:      true,
+    exception_url: false,
+    htmlMinifier: {
+        removeComments:            true,
+        collapseWhitespace:        true,
+        collapseBooleanAttributes: true,
+        removeAttributeQuotes:     true,
+        removeEmptyAttributes:     true,
+        minifyJS:                  true
+    }
 }));
 
 app.use(bodyParser.urlencoded({
