@@ -65,9 +65,9 @@ app.post('/subscribe', (req, res) => {
         res.set('Access-Control-Allow-Origin', '*.ampproject.org');
         res.set('AMP-Access-Control-Allow-Source-Origin', 'https://hot-shapers.on-that.website');
         res.set('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
-        res.redirect(body.returnurl);
+        res.send({"success": true})
     }, () => {
-        res.status(400).redirect(body.returnurl);
+        res.status(400).send({"success": false});
     });
 });
 
