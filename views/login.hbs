@@ -83,7 +83,7 @@
 	</header>
 
  	<section>
- 		<form method="POST" name="login" action="/login">
+ 		<form method="POST" name="login" action="/login" onsubmit="sendForm(this)">
             <p id="response"></p>
  			<input class="btn" type="email" name="email" placeholder="Укажите ваш e-mail" required>
  			<input class="btn default" type="submit" value="Отправить">
@@ -93,14 +93,16 @@
     </section>
 
     <script>
-        var formData = new FormData(document.forms.person);
-        var response = document.getElementById('response');
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/login");
-        xhr.send(formData);
+        var sendForm = function(el) {
+            var formData = new FormData(this);
+            var response = document.getElementById('response');
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/login");
+            xhr.send(formData);
 
-        if (xhr.status !== 200) {
-            response.innerHTML = xhr.response;
+            if (xhr.status !== 200) {
+                response.innerHTML = xhr.response;
+            }
         }
     </script>
 </body>
