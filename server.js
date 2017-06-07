@@ -18,7 +18,10 @@ const port = process.env.PORT;
 app.disable('x-powered-by');
 
 app.set('views engine', 'hbs');
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'), {
+    etag: true,
+    maxage: 86400000
+});
 
 app.use(bodyParser.urlencoded({
     extended: true
