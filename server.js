@@ -20,7 +20,7 @@ app.disable('x-powered-by');
 app.set('views engine', 'hbs');
 app.use(express.static(__dirname + '/public', {
     etag: true,
-    maxAge: '1d'
+    maxAge: '30 days'
 }));
 
 app.use(bodyParser.urlencoded({
