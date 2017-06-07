@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="спортивная одежда для похудения hot shapers hotshapers избавиться от лишнего веса для фитнеса пояс бриджи леггинсы майка футболка утягивающее боди утягивающие шорты спорт для занятий спортом">
     <link rel="canonical" href="https://hot-shapers.on-that.website" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="icon" href="img/favicon.png">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <script id="amp-access" type="application/json">
@@ -729,7 +729,7 @@
 
         @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
             .title {
-                margin: 25vh 30px 0 auto;
+                width: 500px;
                 font-size: 1.5rem;
             }
 
@@ -762,6 +762,34 @@
 
             .promo-overlay {
                 background-size: auto 100%;
+            }
+        }
+
+        @media (max-width: 700px) and (orientation: portrait) {
+            .home-overlay {
+                background-image: url('img/home-vert-sm-min.jpg');
+            }
+        }
+
+        @media (min-width: 700px) and (orientation: portrait) {
+            .home-overlay {
+                background-image: url('img/home-vert-min.jpg');
+            }
+        }
+
+        @media (max-width: 700px) and (orientation: landscape) {
+            .home-overlay {
+                background-image: url('img/home-sm-min.jpg');
+            }
+        }
+
+        @media (max-width: 700px) {
+            .neotex-overlay {
+                background-image: url('img/neotex-sm-min.jpg');
+            }
+
+            .promo-overlay {
+                background-image: url('img/promo-sm-min.jpg');
             }
         }
     </style>

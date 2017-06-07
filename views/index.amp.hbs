@@ -394,10 +394,6 @@
             max-width: 100%;
             width: 500px;
             height: auto;
-            min-width: 500px;
-        }
-
-        .catalog-content {
         }
 
         .catalog-content .name {
@@ -644,10 +640,6 @@
                 padding: 10px;
             }
 
-            .catalog-image {
-                min-width: 500px;
-            }
-
             .catalog-content .price {
                 margin-bottom: 0;
                 margin-top: 0;
@@ -834,23 +826,23 @@
                 <h3 class="add-title">С одеждой Hot Shapers часто покупают:</h3>
 
                 <div class="order-add">
-                    <amp-img src="img/add3-min.jpg" [src]="\{{adds.currentAdd1.img}}" alt="Набор утягивающего белья" [alt]="\{{adds[currentAdd1].name}}" width="300" height="300" layout="responsive"></amp-img>
-                    <h3 [text]="\{{adds[currentAdd1].name}}">Набор утягивающего белья</h3>
-                    <p [text]="\{{adds[currentAdd1].description}}">Способствует похудению и создает соблазнительный силуэт.</p>
+                    <amp-img src="img/add3-min.jpg" alt="Набор утягивающего белья" width="300" height="300" layout="responsive"></amp-img>
+                    <h3>Набор утягивающего белья</h3>
+                    <p>Способствует похудению и создает соблазнительный силуэт.</p>
                     <div>Доступные размеры:
-                        <div [text]="\{{adds[currentAdd1].sizes}}">S / M / L / XL</div>
+                        <div>S / M / L / XL</div>
                     </div>
-                    <p class="add-price" [text]="\{{adds[currentAdd1].price}} ₽">1699 ₽</p>
+                    <p class="add-price">1699 ₽</p>
                 </div>
 
                 <div class="order-add">
-                    <amp-img src="img/add4-min.jpg" [src]="\{{adds.currentAdd2.img}}" alt="Шорты утягивающие" [alt]="\{{adds[currentAdd2].name}}" width="300" height="300" layout="responsive"></amp-img>
-                    <h3 [text]="\{{adds[currentAdd2].name}}">Шорты утягивающие</h3>
-                    <p [text]="\{{adds[currentAdd2].description}}">Поддерживают фигуру и совершенно незаметны под одеждой.</p>
+                    <amp-img src="img/add4-min.jpg" alt="Шорты утягивающие" width="300" height="300" layout="responsive"></amp-img>
+                    <h3>Шорты утягивающие</h3>
+                    <p>Поддерживают фигуру и совершенно незаметны под одеждой.</p>
                     <div>Доступные размеры:
-                        <div [text]="\{{adds[currentAdd2].sizes}}">XL / XXL / XXXL</div>
+                        <div>XL / XXL / XXXL</div>
                     </div>
-                    <p class="add-price" [text]="\{{adds[currentAdd2].price}} ₽">999 ₽</p>
+                    <p class="add-price">999 ₽</p>
                 </div>
             </div>
 
