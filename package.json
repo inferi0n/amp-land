@@ -1,0 +1,32 @@
+{
+  "name": "hot-shapers.online",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "engines": {
+    "node": ">=6.10.3",
+    "npm": ">=3.10.10"
+  },
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inferi0n/amp-land.git"
+  },
+  "author": "inferion",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/inferi0n/amp-land/issues"
+  },
+  "homepage": "https://github.com/inferi0n/amp-land#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "hbs": "^4.0.1",
+    "helmet": "^3.6.1",
+    "mongodb": "^2.2.28",
+    "mongoose": "^4.10.5"
+  }
+}
