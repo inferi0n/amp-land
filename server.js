@@ -36,10 +36,20 @@ app.get('/auth', (req, res) => {
     res.set('AMP-Access-Control-Allow-Source-Origin', 'https://hot-shapers.on-that.website');
     res.set('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
 
-    if (req.cookies['amp-subscribe'].access) {
-        res.send({"success": true});
+    if (req.cookies['amp-subscribe']) {
+        if (req.cookies['amp-subscribe'].access === true) {
+            res.send({
+                "access": true
+            });
+        } else {
+            res.send({
+                "access": false
+            });
+        }
     } else {
-        res.send({"success": false});
+        res.send({
+            access: true
+        });
     }
 });
 
@@ -65,7 +75,12 @@ app.post('/order', (req, res) => {
 app.post('/subscribe', (req, res) => {
     let body = _.pick(req.body, ['email', 'returnurl']);
     let user = new User(body);
+
     res.set('Content-type', 'application/json');
+    res.set('Access-Control-Allow-Credentials', true);
+    res.set('Access-Control-Allow-Origin', '*.ampproject.org');
+    res.set('AMP-Access-Control-Allow-Source-Origin', 'https://hot-shapers.on-that.website');
+    res.set('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
 
     user.save().then(() => {
         let access = {
@@ -73,13 +88,10 @@ app.post('/subscribe', (req, res) => {
             "subscriber": true
         };
         res.cookie('amp-subscribe', access);
-        res.send(access);
+        res.redirect(body.returnurl + '#success=true');
     }, () => {
         res.clearCookie('amp-subscribe');
-        res.send({
-            "access":     false,
-            "subscriber": false
-        });
+        res.redirect(body.returnurl + '#success=false');
     });
 });
 
