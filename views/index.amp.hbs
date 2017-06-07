@@ -10,7 +10,6 @@
     <script async custom-element="amp-lightbox" src="https://cdn.ampproject.org/v0/amp-lightbox-0.1.js"></script>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
     <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.1.js"></script>
-    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
     <script async custom-element="amp-access" src="https://cdn.ampproject.org/v0/amp-access-0.1.js"></script>
     <title>Hot Shapers / Одежда для похудения</title>
     <meta name="description" content="">
@@ -412,7 +411,6 @@
 
         .catalog-content .sizes-caption {
             font-weight: bold;
-            display: inline-block;
             margin-right: 100px;
         }
 
@@ -420,27 +418,6 @@
             font-weight: normal;
             display: block;
             margin-bottom: 10px;
-        }
-
-        .catalog-content .likes {
-            display: inline-block;
-            font-size: 1.5em;
-            cursor: pointer;
-        }
-
-        .catalog-content .icon_like {
-            font-style: normal;
-            font-weight: bold;
-            color: #507299;
-            opacity: 0.6;
-        }
-
-        .catalog-content .icon_like.liked {
-            opacity: 1;
-        }
-
-        .catalog-content .like_count {
-            font-weight: 300;
         }
 
         .catalog-content .price {
@@ -669,10 +646,6 @@
 
             .catalog-image {
                 min-width: 500px;
-            }
-
-            .catalog-content .likes {
-                margin: 0;
             }
 
             .catalog-content .price {
@@ -920,8 +893,6 @@
         </section>
     </amp-lightbox>
 
-    <!--<amp-list height="2623" src="data/products">-->
-        <!--<template type="amp-mustache">-->
     <section class="catalog-wrapper">
         {{#each items}}
             <section id="{{id}}" class="catalog {{name}}">
@@ -935,17 +906,13 @@
                         Доступные размеры:
                         <div class="sizes">{{sizes}}</div>
                     </div>
-                    <div class="likes" tabindex="1" role="checkbox" on="tap:AMP.setState({liked: ((liked - 1) * (-1) + '')})"><i class="icon_like" [class]="'icon_like ' + likeState[liked]">♡</i><span class="like_count">{{likes}}</span></div>
-                    <br>
                     <span class="price" amp-access="NOT access">{{oldPrice}} ₽</span>
                     <span class="price" amp-access="access">{{newPrice}} ₽</span>
-                    <button class="btn default" on="tap:order,AMP.setState({currentAdd1: '{{add1}}', currentAdd2: '{{add2}}'})">Заказать сейчас</button>
+                    <button class="btn default" on="tap:order">Заказать сейчас</button>
                 </div>
             </section>
         {{/each}}
     </section>
-        <!--</template>-->
-    <!--</amp-list>-->
 
     <section id="promo" class="promo">
         <div class="promo-container">

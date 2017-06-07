@@ -29,7 +29,7 @@ let mail = (req, res) => {
         if (err) {
             return res.status(400).send(err);
         } else {
-            return res.send();
+            return res.send({"success": true});
         }
     });
 };
