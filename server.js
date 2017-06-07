@@ -29,7 +29,7 @@ app.use(cookieParser());
 
 
 app.get('/', readProducts, (req, res) => {
-   res.render('index.amp.hbs', {
+   res.render('index.amp.min.hbs', {
        items: req.products.items
    });
 });
