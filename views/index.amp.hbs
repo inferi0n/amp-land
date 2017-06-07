@@ -938,8 +938,8 @@
                     </div>
                     <div class="likes" tabindex="1" role="checkbox" on="tap:AMP.setState({liked: ((liked - 1) * (-1) + '')})"><i class="icon_like" [class]="'icon_like ' + likeState[liked]">♡</i><span class="like_count">\{{likes}}</span></div>
                     <br>
-                    <p class="price" amp-access="NOT access" amp-access-hide>\{{oldPrice}} ₽</p>
-                    <p class="price" amp-access="access">\{{newPrice}} ₽</p>
+                    <p class="price" amp-access="\{{deny}}">\{{oldPrice}} ₽</p>
+                    <p class="price" amp-access="\{{allow}}">\{{newPrice}} ₽</p>
                     <button class="btn default" on="tap:order,AMP.setState({currentAdd1: '\{{add1}}', currentAdd2: '\{{add2}}'})">Заказать сейчас</button>
                 </div>
             </section>

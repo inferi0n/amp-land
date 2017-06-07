@@ -39,16 +39,16 @@ app.get('/auth', (req, res) => {
     if (req.cookies['amp-subscribe']) {
         if (req.cookies['amp-subscribe'].access === true) {
             res.send({
-                "access": true
+                access: true
             });
         } else {
             res.send({
-                "access": false
+                access: false
             });
         }
     } else {
         res.send({
-            access: true
+            access: false
         });
     }
 });
