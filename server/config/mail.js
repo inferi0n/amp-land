@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
 let transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: 'Gmail',
     auth: {
         user: 'inferion00@gmail.com',
         pass: 'leo903110psw'
@@ -9,7 +9,7 @@ let transporter = nodemailer.createTransport({
 });
 
 let mailOpts = {
-    from: '"Почтовый робот <order@hot-shapers.online>',
+    from: 'Почтовый робот <order@hot-shapers.online>',
     to: 'mephisto011@gmail.com',
     subject: 'Заказ на сайте Hot Shapers',
     text: 'На сайте Hot Shapers был сделан заказ.',

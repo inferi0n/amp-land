@@ -25,6 +25,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+
 app.get('/', readProducts, (req, res) => {
    res.render('index.amp.hbs', {
        items: req.products.items
@@ -65,12 +66,22 @@ app.post('/order', (req, res) => {
     let options = mailOpts;
     options.html = `Номер телефона покупателя: ${body.phone}`;
 
-    sendMail(options, (err, res) => {
+    res.set('Content-type', 'application/json');
+    res.set('Access-Control-Allow-Credentials', true);
+    res.set('Access-Control-Allow-Origin', '*.ampproject.org');
+    res.set('AMP-Access-Control-Allow-Source-Origin', 'https://hot-shapers.on-that.website');
+    res.set('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
+
+    console.log('1');
+
+    sendMail(options, (err, info) => {
         if (err) {
-            return res.status(400).send({"success": false});
+            return res.status(400).send(info.response);
         }
 
-        res.send({"success": true});
+        console.log('2');
+
+        res.send(info.response);
     });
 });
 
