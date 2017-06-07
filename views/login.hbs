@@ -83,15 +83,25 @@
 	</header>
 
  	<section>
- 		<form method="POST" action-xhr="/login">
-            {{#if error}}
-                <p>{{error}}</p>
-            {{/if}}
+ 		<form method="POST" name="login" action="/login">
+            <p id="response"></p>
  			<input class="btn" type="email" name="email" placeholder="Укажите ваш e-mail" required>
  			<input class="btn default" type="submit" value="Отправить">
             <input name="returnurl" type="hidden" value="https://cdn.ampproject.org/v0/amp-login-done-0.1.html?url=https://hot-shapers.on-that.website#subscription">
             <p class="notice">* Вы сможете отписаться в любое время, по телефону <a href="tel:+74951202762">+7 (495) 120-27-62</a> или по ссылке в письме</p>
         </form>
     </section>
+
+    <script>
+        var formData = new FormData(document.forms.person);
+        var response = document.getElementById('response');
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/login");
+        xhr.send(formData);
+
+        if (xhr.status !== 200) {
+            response.innerHTML = xhr.response;
+        }
+    </script>
 </body>
 </html>

@@ -71,9 +71,7 @@ app.post('/login', setHeaders, (req, res) => {
         res.redirect(body.returnurl + '#success=true');
     }, (err) => {
         res.clearCookie('amp-subscribe');
-        res.render('login.hbs', {
-            error: "Адрес электронной почты уже занят. Попробуйте снова"
-        })
+        res.send("Адрес электронной почты уже занят. Попробуйте снова")
     });
 });
 
