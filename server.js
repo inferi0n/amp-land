@@ -26,6 +26,10 @@ app.get('/', (req, res) => {
    res.render('index.amp.hbs');
 });
 
+app.get('/auth', (req, res) => {
+    console.log(req.body);
+});
+
 app.get('/login', (req, res) => {
    res.render('login.hbs');
 });
