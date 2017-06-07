@@ -30,12 +30,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/auth', (req, res) => {
+    res.set('Content-type', 'application/json');
+    res.set('Access-Control-Allow-Credentials', true);
+    res.set('Access-Control-Allow-Origin', '*.ampproject.org');
+    res.set('AMP-Access-Control-Allow-Source-Origin', 'https://hot-shapers.on-that.website');
+    res.set('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
+
     if (req.cookies['amp-subscribe'].access) {
-        res.set('Content-type', 'application/json');
-        res.set('Access-Control-Allow-Credentials', true);
-        res.set('Access-Control-Allow-Origin', '*.ampproject.org');
-        res.set('AMP-Access-Control-Allow-Source-Origin', 'https://hot-shapers.on-that.website');
-        res.set('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
         res.send({"success": true});
     } else {
         res.send({"success": false});
