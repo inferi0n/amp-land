@@ -851,23 +851,23 @@
                 <h3 class="add-title">С одеждой Hot Shapers часто покупают:</h3>
 
                 <div class="order-add">
-                    <amp-img src="img/add3-min.jpg" [src]="{{adds.currentAdd1.img}}" alt="Набор утягивающего белья" [alt]="{{adds[currentAdd1].name}}" width="300" height="300" layout="responsive"></amp-img>
-                    <h3 [text]="{{adds[currentAdd1].name}}">Набор утягивающего белья</h3>
-                    <p [text]="{{adds[currentAdd1].description}}">Способствует похудению и создает соблазнительный силуэт.</p>
+                    <amp-img src="img/add3-min.jpg" [src]="\{{adds.currentAdd1.img}}" alt="Набор утягивающего белья" [alt]="\{{adds[currentAdd1].name}}" width="300" height="300" layout="responsive"></amp-img>
+                    <h3 [text]="\{{adds[currentAdd1].name}}">Набор утягивающего белья</h3>
+                    <p [text]="\{{adds[currentAdd1].description}}">Способствует похудению и создает соблазнительный силуэт.</p>
                     <div>Доступные размеры:
-                        <div [text]="{{adds[currentAdd1].sizes}}">S / M / L / XL</div>
+                        <div [text]="\{{adds[currentAdd1].sizes}}">S / M / L / XL</div>
                     </div>
-                    <p class="add-price" [text]="{{adds[currentAdd1].price}} ₽">1699 ₽</p>
+                    <p class="add-price" [text]="\{{adds[currentAdd1].price}} ₽">1699 ₽</p>
                 </div>
 
                 <div class="order-add">
-                    <amp-img src="img/add4-min.jpg" [src]="{{adds.currentAdd2.img}}" alt="Шорты утягивающие" [alt]="{{adds[currentAdd2].name}}" width="300" height="300" layout="responsive"></amp-img>
-                    <h3 [text]="{{adds[currentAdd2].name}}">Шорты утягивающие</h3>
-                    <p [text]="{{adds[currentAdd2].description}}">Поддерживают фигуру и совершенно незаметны под одеждой.</p>
+                    <amp-img src="img/add4-min.jpg" [src]="\{{adds.currentAdd2.img}}" alt="Шорты утягивающие" [alt]="\{{adds[currentAdd2].name}}" width="300" height="300" layout="responsive"></amp-img>
+                    <h3 [text]="\{{adds[currentAdd2].name}}">Шорты утягивающие</h3>
+                    <p [text]="\{{adds[currentAdd2].description}}">Поддерживают фигуру и совершенно незаметны под одеждой.</p>
                     <div>Доступные размеры:
-                        <div [text]="{{adds[currentAdd2].sizes}}">XL / XXL / XXXL</div>
+                        <div [text]="\{{adds[currentAdd2].sizes}}">XL / XXL / XXXL</div>
                     </div>
-                    <p class="add-price" [text]="{{adds[currentAdd2].price}} ₽">999 ₽</p>
+                    <p class="add-price" [text]="\{{adds[currentAdd2].price}} ₽">999 ₽</p>
                 </div>
             </div>
 
@@ -894,20 +894,20 @@
 
     <amp-list class="catalog" src="/products.json" layout="responsive" height="520" width="1000">
         <template type="amp-mustache">
-            <section id="{{id}}" class="catalog {{name}}">
+            <section id="\{{id}}" class="catalog \{{name}}">
                 <div class="catalog-image">
-                    <amp-img src="{{img}}" alt="{{name}}" width="500" height="500"></amp-img>
+                    <amp-img src="\{{img}}" alt="\{{name}}" width="500" height="500"></amp-img>
                 </div>
                 <div class="catalog-content">
-                    <h3 class="name">{{name}}</h3>
-                    <p class="description">{{description}}</p>
+                    <h3 class="name">\{{name}}</h3>
+                    <p class="description">\{{description}}</p>
                     <div class="sizes-caption">Доступные размеры:</div>
-                    <div class="sizes">{{sizes}}</div>
-                    <div class="likes" on="tap:AMP.setState({liked: ((liked - 1) * (-1) + '')})"><i class="icon_like" [class]="'icon_like ' + likeState[liked]">♡</i><span class="like_count">{{likes}}</span></div>
+                    <div class="sizes">\{{sizes}}</div>
+                    <div class="likes" on="tap:AMP.setState({liked: ((liked - 1) * (-1) + '')})"><i class="icon_like" [class]="'icon_like ' + likeState[liked]">♡</i><span class="like_count">\{{likes}}</span></div>
                     <br>
-                    <p class="price" amp-access="NOT access" amp-access-hide>{{oldPrice}} ₽</p>
-                    <p class="price" amp-access="access">{{newPrice}} ₽</p>
-                    <button class="btn default" on="tap:order,setState({currentAdd1: '{{add1}}', currentAdd2: '{{add2}}'})">Заказать сейчас</button>
+                    <p class="price" amp-access="NOT access" amp-access-hide>\{{oldPrice}} ₽</p>
+                    <p class="price" amp-access="access">\{{newPrice}} ₽</p>
+                    <button class="btn default" on="tap:order,setState({currentAdd1: '\{{add1}}', currentAdd2: '\{{add2}}'})">Заказать сейчас</button>
                 </div>
             </section>
         </template>
