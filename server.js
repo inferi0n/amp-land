@@ -56,7 +56,7 @@ app.get('/login', (req, res) => {
    res.render('login.hbs');
 });
 
-app.post('/order', setHeaders, mail);
+app.post('/order', mail);
 
 app.post('/login', setHeaders, (req, res) => {
     let body = _.pick(req.body, ['email', 'returnurl']);
