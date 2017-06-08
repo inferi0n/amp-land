@@ -45,13 +45,15 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 
-app.get('/', readProducts, (req, res) => {
+app.get('/', setHeaders, readProducts, (req, res) => {
    res.render('index.amp.min.hbs', {
        items: req.products.items
    });
 });
 
 app.get('/auth', setHeaders, (req, res) => {
+    res.set('Content-type', 'application/json');
+
     if (req.cookies['amp-subscribe']) {
         if (req.cookies['amp-subscribe'].access === true) {
             res.send({
@@ -93,10 +95,12 @@ app.post('/login', setHeaders, (req, res) => {
 });
 
 app.get('/data/products', readProducts, (req, res) => {
+    res.set('Content-type', 'application/json');
     res.send(req.products);
 });
 
 app.get('/data/adds', readAdds, (req, res) => {
+    res.set('Content-type', 'application/json');
     res.send(req.adds);
 });
 
