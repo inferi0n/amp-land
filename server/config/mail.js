@@ -15,7 +15,7 @@ let mail = (req, res) => {
 
     let mailOpts = {
         from: 'Почтовый робот <order@hot-shapers.online>',
-        to: process.env.TARGET_MAIL,
+        to: process.env.ORDER_MAIL,
         subject: 'Заказ на сайте Hot Shapers',
         text: 'На сайте Hot Shapers был сделан заказ.',
         html: `<h1>Заказ на сайте</h1>
