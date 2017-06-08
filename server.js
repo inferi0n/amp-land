@@ -4,7 +4,6 @@ const express      = require('express');
 const bodyParser   = require('body-parser');
 const _            = require('lodash');
 const cookieParser = require('cookie-parser');
-const minifyHTML   = require('express-minify-html');
 
 const { mongoose }     = require('./server/db/mongoose');
 const { readAdds }     = require('./server/middleware/readAdds');
@@ -77,21 +76,17 @@ app.post('/order', parseForm, setHeaders, mail);
 app.post('/login', setHeaders, (req, res) => {
     let body = _.pick(req.body, ['name', 'email', 'returnurl']);
     let user = new User(body);
+    let access = {
+        "access":     true,
+        "subscriber": true
+    };
 
     user.save().then(() => {
-        let access = {
-            "access":     true,
-            "subscriber": true
-        };
         res.cookie('amp-username', body.name);
         res.cookie('amp-subscribe', access);
         return res.redirect(body.returnurl + '#success=true');
     }, (err) => {
         if (err.code && err.code === 11000) {
-            let access = {
-                "access":     true,
-                "subscriber": true
-            };
             res.cookie('amp-username', body.name);
             res.cookie('amp-subscribe', access);
             return res.redirect(body.returnurl + '#success=true');
