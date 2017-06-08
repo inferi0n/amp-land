@@ -26,9 +26,10 @@ let mail = (req, res) => {
 
     transporter.sendMail(mailOpts, (err, info) => {
         if (err) {
+            console.log(err);
             return res.status(400).send('Почтовый сервер недоступен, повторите попытку позднее.');
         } else {
-            return res.send();
+            return res.send({"success": true});
         }
     });
 };
