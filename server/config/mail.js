@@ -3,7 +3,6 @@ const _          = require('lodash');
 
 let mail = (req, res) => {
     let body = _.pick(req.body, ['phone']);
-    console.log(req);
 
     let transporter = nodemailer.createTransport({
         service: 'Gmail',

@@ -47,7 +47,8 @@ app.use(cookieParser());
 
 app.get('/', setHeaders, readProducts, (req, res) => {
    res.render('index.amp.min.hbs', {
-       items: req.products.items
+       items: req.products.items,
+       url: process.env.SITE_URL
    });
 });
 
@@ -72,7 +73,9 @@ app.get('/auth', setHeaders, (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-   res.render('login.hbs');
+   res.render('login.hbs', {
+       url: process.env.SITE_URL
+   });
 });
 
 app.post('/order', parseForm, setHeaders, mail);
