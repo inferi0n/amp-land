@@ -47,7 +47,6 @@
         .btn {
             padding: 0.7em 2em;
             font-size: 1em;
-            text-transform: uppercase;
             cursor: pointer;
             -webkit-box-shadow: none;
             box-shadow: none;
@@ -59,6 +58,7 @@
         .btn.default {
             color: black;
             background-color: #ffd600;
+            text-transform: uppercase;
         }
 
         .btn:focus {
@@ -83,28 +83,14 @@
 	</header>
 
  	<section>
- 		<form method="POST" name="login" action="/login" onsubmit="sendForm(event, this)">
+ 		<form method="POST" name="login" action="/login" target="_top">
             <p id="response"></p>
+            <input class="btn" type="text" name="name" pattern="^[A-Za-zА-Яа-яЁё0-9_]{1,15}$" placeholder="Как нам вас называть?" required>
  			<input class="btn" type="email" name="email" placeholder="Укажите ваш e-mail" required>
  			<input class="btn default" type="submit" value="Отправить">
             <input name="returnurl" type="hidden" value="https://cdn.ampproject.org/v0/amp-login-done-0.1.html?url={{url}}#subscription">
             <p class="notice">* Вы сможете отписаться в любое время, по телефону <a href="tel:+74951202762">+7 (495) 120-27-62</a> или по ссылке в письме</p>
         </form>
     </section>
-
-    <script>
-        var sendForm = function(event, el) {
-            event.preventDefault();
-            var formData = new FormData(el);
-            var response = document.getElementById('response');
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/login");
-            xhr.send(formData);
-
-            if (xhr.status !== 200) {
-                response.innerHTML = xhr.response;
-            }
-        }
-    </script>
 </body>
 </html>

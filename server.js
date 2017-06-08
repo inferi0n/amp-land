@@ -48,28 +48,35 @@ app.use(cookieParser());
 app.get('/', setHeaders, readProducts, (req, res) => {
    res.render('index.amp.min.hbs', {
        items: req.products.items,
+       adds: req.products.adds,
        url: process.env.SITE_URL
    });
 });
 
 app.get('/auth', setHeaders, (req, res) => {
     res.set('Content-type', 'application/json');
+    let access = {};
 
     if (req.cookies['amp-subscribe']) {
-        if (req.cookies['amp-subscribe'].access === true) {
-            res.send({
-                access: true
-            });
+        if (req.cookies['amp-subscribe'].subscriber === true) {
+            if (req.cookies['amp-username']) {
+                access.name = req.cookies['amp-username'];
+            }
+            access.subscriber = true;
+            access.access = true;
+        } else if (req.cookies['amp-subscribe'].access === true) {
+            access.subscriber = false;
+            access.access = true;
         } else {
-            res.send({
-                access: false
-            });
+            access.subscriber = false;
+            access.access = false;
         }
     } else {
-        res.send({
-            access: false
-        });
+        access.subscriber = false;
+        access.access = false;
     }
+
+    res.send(access);
 });
 
 app.get('/login', (req, res) => {
@@ -81,7 +88,7 @@ app.get('/login', (req, res) => {
 app.post('/order', parseForm, setHeaders, mail);
 
 app.post('/login', setHeaders, (req, res) => {
-    let body = _.pick(req.body, ['email', 'returnurl']);
+    let body = _.pick(req.body, ['name', 'email', 'returnurl']);
     let user = new User(body);
 
     user.save().then(() => {
@@ -89,11 +96,21 @@ app.post('/login', setHeaders, (req, res) => {
             "access":     true,
             "subscriber": true
         };
+        res.cookie('amp-username', body.name);
         res.cookie('amp-subscribe', access);
-        res.redirect(body.returnurl + '#success=true');
+        return res.redirect(body.returnurl + '#success=true');
     }, (err) => {
-        res.clearCookie('amp-subscribe');
-        res.send("Адрес электронной почты уже занят. Попробуйте снова")
+        if (err.code && err.code === 11000) {
+            let access = {
+                "access":     true,
+                "subscriber": true
+            };
+            res.cookie('amp-username', body.name);
+            res.cookie('amp-subscribe', access);
+            return res.redirect(body.returnurl + '#success=true');
+        } else {
+            return res.send("<h2>Приносим свои извинения</h2><p>Произошла ошибка, пожалуйста попробуйте позднее, или перезвоните по номеру</p><p><a href='+74951202762'>+7 (495) 120-27-62</a></p> <p>Cообщите об ошибке и приобретайте наши товары со <b>скидкой 15%</b>.</p>")
+        }
     });
 });
 
