@@ -9,6 +9,7 @@ const minifyHTML   = require('express-minify-html');
 const { mongoose }     = require('./server/db/mongoose');
 const { readAdds }     = require('./server/middleware/readAdds');
 const { readProducts } = require('./server/middleware/readProducts');
+const { parseForm }  = require('./server/middleware/multiparty');
 const { setHeaders } = require('./server/middleware/setHeaders');
 const { User }         = require('./server/models/user');
 const { mail } = require('./server/config/mail');
@@ -40,7 +41,6 @@ app.use(minifyHTML({
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
 app.use(bodyParser.json());
 app.use(cookieParser());
 
@@ -75,7 +75,7 @@ app.get('/login', (req, res) => {
    res.render('login.hbs');
 });
 
-app.post('/order', mail);
+app.post('/order', parseForm, setHeaders, mail);
 
 app.post('/login', setHeaders, (req, res) => {
     let body = _.pick(req.body, ['email', 'returnurl']);

@@ -188,7 +188,7 @@
                 <a class="order-phone" href="tel:+74951202762">+7 (495) 120-27-62</a>
                 <p>или</p>
                 <p>Оставьте заявку и наш менеджер перезвонит вам в течение 15 минут</p>
-                <form method="POST" action-xhr="/order" on="submit:order.close,success-lightbox" target="_top">
+                <form method="POST" action-xhr="/order" on="submit:order.close,success-lightbox" target="_top" enctype="application/x-www-form-urlencoded">
                     <input class="btn yellow-border" name="phone" type="tel" placeholder="Ваш номер телефона" pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" title="Введите ваш номер телефона, например, 89991234567" required>
                     <input class="btn default yellow-border" type="submit" value="Отправить">
                 </form>
