@@ -8,14 +8,14 @@ let mail = (req, res) => {
     let transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: 'mephisto011@gmail.com',
-            pass: '1625479803'
+            user: process.env.DOMAIN_MAIL,
+            pass: process.env.DOMAIN_PASS
         }
     });
 
     let mailOpts = {
         from: 'Почтовый робот <order@hot-shapers.online>',
-        to: 'inferion00@gmail.com',
+        to: process.env.TARGET_MAIL,
         subject: 'Заказ на сайте Hot Shapers',
         text: 'На сайте Hot Shapers был сделан заказ.',
         html: `<h1>Заказ на сайте</h1>
