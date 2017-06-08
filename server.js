@@ -25,18 +25,18 @@ app.use(express.static(__dirname + '/public', {
     maxAge: '30 days'
 }));
 
-app.use(minifyHTML({
-    override:      true,
-    exception_url: false,
-    htmlMinifier: {
-        removeComments:            true,
-        collapseWhitespace:        true,
-        collapseBooleanAttributes: true,
-        removeAttributeQuotes:     true,
-        removeEmptyAttributes:     true,
-        minifyJS:                  true
-    }
-}));
+// app.use(minifyHTML({
+//     override:      true,
+//     exception_url: false,
+//     htmlMinifier: {
+//         removeComments:            true,
+//         collapseWhitespace:        true,
+//         collapseBooleanAttributes: true,
+//         removeAttributeQuotes:     true,
+//         removeEmptyAttributes:     true,
+//         minifyJS:                  true
+//     }
+// }));
 
 app.use(bodyParser.urlencoded({
     extended: true
